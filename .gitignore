@@ -1,0 +1,10 @@
+.settings/
+/build/
+.classpath
+.project
+
+.idea/
+out/
+target/
+hadoop-student.iml
+
