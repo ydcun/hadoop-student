@@ -83,3 +83,17 @@
 ## Application master
 
 ## Container
+
+## 安全模式
+    作用：
+    	• 等待Datanode上传black  report
+    	• 上报blackes/total blasces =99.9999%。30秒后Safemode is off。
+        ps：可以在master:50090的Summary中看到描述和状态变化
+    查看安全模式状态：
+        hdfs dfsadmin -safemode get  	查看安全模式状态  
+        Hdfs dfsadmin -safemode enter	进入安全模式
+        Hdfs dfsadmin -safemode leave	离开安全模式
+        
+## 查看块报告
+    hdfs dfsadmin -report
+    与master:50090中显示的一样
