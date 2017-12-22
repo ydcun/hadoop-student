@@ -145,7 +145,13 @@
                 group
             * 压缩
                 compress 可以自己设置修改节省空间
-            * combiner
+                在mapred-site.xml中设置  
+                    mapreduce.map.output.compress  默认false
+                也可以在Configuration中设置
+                    conf.set("mapreduce.map.output.compress","true");
+                    conf.set("mapreduce.map.output.compress.codec","org.apache.hadoop.io.compress.SnappyCodec");
+
+            * combiner 组合
                 Map Task端的Reduce
     * step 4
         reduce

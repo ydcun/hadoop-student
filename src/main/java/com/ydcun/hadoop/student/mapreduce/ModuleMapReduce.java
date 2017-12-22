@@ -6,6 +6,7 @@ import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
+import org.apache.hadoop.io.compress.Lz4Codec;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Reducer;
@@ -72,6 +73,7 @@ public class ModuleMapReduce extends Configured implements Tool{
 	public int run(String args[]) throws Exception{
 		//1.load config
 		Configuration conf = this.getConf();
+
 		//2.create job
 		Job job = Job.getInstance(conf, this.getClass().getName());
 		job.setJarByClass(this.getClass());
@@ -85,6 +87,17 @@ public class ModuleMapReduce extends Configured implements Tool{
 		//TODO
 		job.setMapOutputKeyClass(Text.class);
 		job.setMapOutputValueClass(IntWritable.class);
+
+//************************************Shuffle**********************************************
+		// 1) partitioner 分区
+//		job.setPartitionerClass(cls);
+		// 2) sort 排序
+//		job.setSortComparatorClass(cls);
+		// 3) optional，combiner 组合
+//		job.setCombinerClass(cls);
+		// 4) group  分组
+//		job.setGroupingComparatorClass(cls);
+//************************************Shuffle**********************************************
 		
 		//3.3 set reducer
 		job.setReducerClass(ModuleReducer.class);
