@@ -27,7 +27,7 @@
 	</property>
 	<property>
                 <name>hadoop.tmp.dir</name>
-                <value>/opt/install/hadoop-2.7.5/mywork/dfs/tmp</value>
+                <value>file:///opt/install/hadoop-2.7.5/mywork/dfs/tmp</value>
         </property>
 </configuration>
 
