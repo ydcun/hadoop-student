@@ -75,7 +75,18 @@
                 <name>mapreduce.jobhistory.webapp.address</name>
                 <value>master:19888</value>
             </property>
+## NameNode
+    存储文件元数据
+        文件名 路径  所属者  所属组  副本数   。。。。
 
+## DateNode
+    默认大小128M
+    Block方式存储，存放在各个机器的本地磁盘
+    本地磁盘路径配置：
+        <property>
+            <name>dfs.datanode.data.dir</name>
+            <value>file://${hadoop.tmp.dir}/dfs/data</value>
+        </property>
 ## SecodaryNameNode
 
 ## ResourceManager
@@ -176,3 +187,82 @@
                 a-zA-Z
             Reduce-02
                 other  
+
+## 时间同步ntp
+    rpm -qa | grep ntp  
+    vim /etc/ntp.conf
+        修改1，打开这个注释，运行同步该时间的网段
+            # Hosts on local network are less restricted.
+            restrict 10.41.5.0 mask 255.255.255.0 nomodify notrap
+        修改2，注释掉自动链接的时间服务器（自己可以改时间）
+            # Use public servers from the pool.ntp.org project.
+            # Please consider joining the pool (http://www.pool.ntp.org/join.html).
+            #server 0.centos.pool.ntp.org iburst
+            #server 1.centos.pool.ntp.org iburst
+            #server 2.centos.pool.ntp.org iburst
+            #server 3.centos.pool.ntp.org iburst
+        修改3，
+            # 外部时间服务器不可用时，以本地时间作为时间服务
+            server  127.127.1.0     # local clock
+            fudge   127.127.1.0 stratum 10
+    vim /etc/sysconfig/ntpd
+        # Drop root to id 'ntp:ntp' by default.
+        SYNC_HWCLOCK=yes
+        OPTIONS="-u ntp:ntp -p /var/run/ntpd.pid -g"
+        
+    ====================================================================
+    客户端：10分钟自动同步
+        crontab -e
+        0-59/10 * * * * /usr/sbin/ntpdate master
+        
+        
+        
+## Haodoop HA 
+    Hadoop 在2.0 以前容易出现单点故障（SPOS）
+    提出：
+        namenode active
+        namenode standby
+        
+    * share edits文件
+        JournalNode
+    * Namenode 配置两个一个active 一个standby
+    * client
+        proxy 代理选择active状态的Namenode
+    * fence
+        确保同一时刻只有一个namenode是active对外提供服务
+       
+       
+       
+       
+    * 手动故障转移
+        hadoop haadmin -help    
+            -transitionToActive nn1
+            -transitionToStandby nn1
+    * 自动故障转移利用Zookeeper
+        * 启动后选举一个active
+        * 监控故障 
+            ZKFC：故障转移监控器
+            
+## HDFS Federation（连门）
+    多个NameNode负责不同的业务
+    NameNode        NameNode        NameNode
+    log             machine         业务数据
+    
+    数据保存到所有的DataNode中（共用）
+    
+    
+## 文件系统快照（HDFS Snapshots）
+
+## HDFS集中式缓存（Centralized Cache Management）
+    2.3.0版本后，DataNode的数据缓存到内存中
+    
+## 分布式拷贝（Distributed Copy）
+    作用：多个集群数据间迁移
+    
+    //不同版本间拷贝
+    hadoop distcp -i hftp://sourceFS:50070/src hdfs://destFS:8020/dest
+    
+## yarn HA
+    
+## ResourceManager restart
+## NodedManager restart

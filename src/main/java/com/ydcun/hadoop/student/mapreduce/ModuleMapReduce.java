@@ -104,6 +104,9 @@ public class ModuleMapReduce extends Configured implements Tool{
 		//TODO
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(IntWritable.class);
+
+		// set reduce num
+//		job.setNumReduceTasks(1);//默认1
 		
 		//3.4 output
 		Path outputPath = new Path(args[1]);
