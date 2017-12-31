@@ -22,7 +22,7 @@
     	YARN
     		sbin/yarn-daemon.sh start|stop resourcemanager|nodemanager
     	mapreduce
-    		sibin/mr-jobhistory-daemon.sh start|stop historyserver
+    		sbin/mr-jobhistory-daemon.sh start|stop historyserver
     		
     模块启动：
         HDFS
@@ -239,7 +239,10 @@
             -transitionToActive nn1
             -transitionToStandby nn1
     * 自动故障转移利用Zookeeper
-        * 启动后选举一个active
+        * 启动zk
+        * 格式化zkfc     bin/hdfs zkfc -formatZK
+        * 在各个namenode节点上启动zkfc   sbin/hadoop-daemin.sh start zkfc
+        * 启动后自动选举一个active（第一次那个namenode的zkfc先启动那个name就是active）
         * 监控故障 
             ZKFC：故障转移监控器
             

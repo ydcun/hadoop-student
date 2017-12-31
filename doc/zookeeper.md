@@ -28,6 +28,9 @@
         2888是与leader通讯接口
         3888是选举leader端口
     
+    启动：
+        在各个节点分别执行：
+        bin/zkServer.sh start
 ## 常用命令
     bin/zkCli.sh
         create /test "test-date"
