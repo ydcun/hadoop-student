@@ -93,9 +93,9 @@ public class MyWordCountMapReduce {
 
 	public static void main(String[] args) throws Exception {
 		// TODO
-//		args = new String[2];
-//		args[0]="hdfs://master:8020/user/ydcun/mapreduce/wordcount/input";
-//		args[1]="hdfs://master:8020/user/ydcun/mapreduce/wordcount/output2";
+		args = new String[2];
+		args[0]="hdfs://ns1/user/ydcun/";
+		args[1]="hdfs://ns1/user/ydcun/output2";
 		int isSuccess = new MyWordCountMapReduce().run(args);
 		System.exit(isSuccess);
 	}

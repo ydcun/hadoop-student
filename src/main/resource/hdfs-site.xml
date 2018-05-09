@@ -50,7 +50,7 @@
 	</property>
 	<property>
 		<name>dfs.journalnode.edits.dir</name>
-		<value>/opt/app/hadoop-2.7.5/mywork/dfs/jn</value>
+		<value>/opt/hadoop/data/dfs/jn</value>
 	</property>
 <!--Name node client proxy-->
 	<property>
@@ -73,7 +73,7 @@
 	 </property>
 	<property>
                 <name>dfs.datanode.data.dir</name>
-                <value>/opt/app/hadoop-2.7.5/mywork/dfs/data</value>
+                <value>/opt/hadoop/data/dfs/data</value>
         </property>
 <!-- HA automatic failover-->
 	<property>

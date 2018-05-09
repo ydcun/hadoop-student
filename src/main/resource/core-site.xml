@@ -33,7 +33,7 @@
        </property>
 	<property>
                 <name>hadoop.tmp.dir</name>
-                <value>/opt/app/hadoop-2.7.5/mywork/dfs/tmp</value>
+                <value>/opt/hadoop/data/dfs/tmp</value>
         </property>
 
 <!-- HA-->

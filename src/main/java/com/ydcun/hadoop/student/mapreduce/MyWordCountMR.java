@@ -96,6 +96,9 @@ public class MyWordCountMR extends Configured implements Tool{
 
 	public static void main(String[] args) throws Exception {
 		// TODO
+		args = new String[2];
+		args[0]="hdfs://ns1/user/ydcun/";
+		args[1]="hdfs://ns1/user/ydcun/output2";
 		Configuration configuration = new Configuration();
 		int isSuccess = ToolRunner.run(configuration,new MyWordCountMR(),args);
 		System.exit(isSuccess);
